@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Donavie Photography</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+  <link rel="stylesheet" href="css/color.css" />
+</head>
+
+<body>
+  <header>
+    <h2>Donavie Ordonez Photography</h2>
+  </header>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md">
+        <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+          onclick="window.location.href='home.html'"> Home </button>
+      </div>
+
+      <div class="col-md">
+        <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+          onclick="window.location.href='contact.html'"> Contact </button>
+      </div>
+
+      <div class="col-md">
+        <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+          onclick="window.location.href='pricing.html'"> Pricing & FAQ </button>
+      </div>
+
+      <div class="col-md">
+        <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+          onclick="window.location.href='aboutme.html'"> About Me </button>
+      </div>
+
+      <div class="col-md">
+        <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+          onclick="window.location.href='portfolio.html'"> Portfolio </button>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  </br>
+
+  <!-- Form for the user to inquire for a photo session-->
+
+  <body class="container">
+    <div class="center">
+      <h1 class="p1">Let's get this shoot rolling!</h1>
+      <form action="email.php" method="POST" enctype="multipart/form-data">
+        <section>
+          <div class="panel panel-default">
+
+            <!-- FEATURE 5) Input Validation: Adding required for each field in the form -->
+            <!--Asking for user's name-->
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input id="clientName" type="text" required name="name" class="form-control" />
+            </div>
+
+            <!--Asking for user's email address-->
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input id="input" type="email" required name="email" class="form-control" />
+            </div>
+
+            <!-- Asking for what type of session the user would like to book -->
+            <div class="form-group">
+              <label class="form-label">What type of session are you interested in booking? (Fashion, Grad/Senior,
+                Family, Couple, Product, Headshot or Other) </label>
+              <input id="input" type="text" required name="session" class="form-control" />
+            </div>
+
+            <!-- Asking the user when they'd like to book the session -->
+            <div class="form-group">
+              <label class="form-label">When are you hoping to book for?</label>
+              <input id="input" type="text" required name="date" class="form-control" />
+            </div>
+
+            <!-- Asking the user how long of a session they'd like to book for -->
+            <div class="form-group">
+              <label class="form-label">How long of session would you like to do?</label>
+              <input id="input" type="text" required name="session_time" class="form-control" />
+            </div>
+
+            <!-- Asking the user where they'd like to book their session -->
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input id="input" type="text" required name="location" class="form-control" />
+            </div>
+
+            <!-- Asking the user for further details on their photo session -->
+            <div class="form-group">
+              <label class="form-label">What is your vision for this project?</label>
+              <input id="input" type="text" required name="details" class="form-control" />
+            </div>
+
+            <!-- Submit button -->
+            <button id="submit" type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+            <div id="myDiv"></div>
+      </form>
+
+      <footer>
+        <a href="https://www.instagram.com/donavie.photographie/?hl=en"><i class="fab fa-instagram">
+          </i></a>
+      </footer>
+
+      <!-- MDB -->
+      <script type="text/javascript" src="js/mdb.min.js"></script>
+      <!-- Custom scripts -->
+      <script type="text/javascript"></script>
+
+      <!-- Preventing HTML injection-->
+      <script>
+
+        $('#submit').on('click', function (event) {
+          event.preventDefault();
+
+          // Checks client's input name for null string or HTML injections
+          var name = $('#clientName').val();
+          var pattern = new RegExp(/[~'!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+
+          // Error message if issue found
+          if (clientName == '' || pattern.test(clientName)) {
+            document.getElementById('errorMessage').innerHTML = "*ERROR* Enter an alphanumeric name\n";
+            return;
+          } else {
+            document.getElementsById('errorMessage').innerHTML = "";
+          }
+
+          // Sending name to the server 
+          $.post('contact.html', {
+            'name': name,
+          }, function (result) {
+            $('#submit').toggleClass('active');
+            if (!result.success) {
+              alert("There was an error sending your form. Please resubmit a valid form");
+            } else {
+              console.log("Message Sent!");
+            }
+          }
+          )
+        });
+      </script>
+
+  </body>
+
+</html>
